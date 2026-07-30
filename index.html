@@ -10,117 +10,249 @@
 
 *{
     box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
 body{
     margin:0;
     height:100vh;
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#050505;
+    background:
+    radial-gradient(circle at top,#243b55,#050505 60%);
     color:white;
-    font-family:Arial, sans-serif;
 }
+
+
+/* hareketli yıldız efekti */
+
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image:
+    radial-gradient(white 1px,transparent 1px);
+    background-size:50px 50px;
+    animation:stars 20s linear infinite;
+    opacity:.25;
+}
+
+
+@keyframes stars{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-200px);
+}
+
+}
+
 
 
 .container{
-    width:95%;
-    max-width:420px;
-    background:#111;
-    border-radius:25px;
-    padding:20px;
-    box-shadow:0 0 25px cyan;
+
+position:relative;
+z-index:2;
+
+width:95%;
+max-width:430px;
+
+background:
+rgba(255,255,255,0.08);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.2);
+
+border-radius:25px;
+
+padding:20px;
+
+box-shadow:
+0 0 30px #00ffff;
+
 }
+
 
 
 .logo{
-    text-align:center;
-    font-size:32px;
-    color:#00ffff;
-    font-weight:bold;
+
+text-align:center;
+
+font-size:35px;
+
+font-weight:bold;
+
+color:#00ffff;
+
+text-shadow:
+0 0 15px cyan;
+
 }
+
 
 
 .status{
-    text-align:center;
-    color:#00ff88;
-    margin:10px;
+
+text-align:center;
+
+color:#00ff88;
+
+margin:10px;
+
 }
+
 
 
 .chat{
-    height:350px;
-    overflow-y:auto;
-    background:#070707;
-    border-radius:15px;
-    padding:15px;
+
+height:330px;
+
+overflow-y:auto;
+
+background:
+rgba(0,0,0,.45);
+
+border-radius:18px;
+
+padding:15px;
+
 }
+
 
 
 .message{
-    margin:12px 0;
-    padding:10px;
-    border-radius:10px;
+
+margin:12px 0;
+
+padding:10px;
+
+border-radius:12px;
+
 }
+
 
 
 .ai{
-    color:#00ff88;
+
+color:#00ff88;
+
+background:
+rgba(0,255,136,.08);
+
 }
+
 
 
 .user{
-    color:#00ffff;
-    text-align:right;
+
+color:#00ffff;
+
+background:
+rgba(0,255,255,.08);
+
+text-align:right;
+
 }
+
 
 
 .input-area{
-    display:flex;
-    margin-top:15px;
+
+display:flex;
+
+margin-top:15px;
+
 }
+
 
 
 input{
-    flex:1;
-    padding:12px;
-    border-radius:12px;
-    border:none;
-    background:#222;
-    color:white;
+
+flex:1;
+
+padding:13px;
+
+border:none;
+
+outline:none;
+
+border-radius:12px;
+
+background:#111;
+
+color:white;
+
 }
+
 
 
 .send{
-    margin-left:8px;
-    background:#00ffff;
-    border:none;
-    border-radius:12px;
-    padding:12px;
+
+margin-left:8px;
+
+border:none;
+
+border-radius:12px;
+
+padding:12px 18px;
+
+background:#00ffff;
+
+cursor:pointer;
+
 }
+
 
 
 .buttons{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:15px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:10px;
+
+margin-top:15px;
+
 }
+
 
 
 .buttons button{
-    padding:10px;
-    border-radius:12px;
-    border:none;
-    background:#222;
-    color:white;
+
+padding:12px;
+
+border:none;
+
+border-radius:15px;
+
+background:#151515;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
 }
 
 
+
 .buttons button:hover{
-    background:#00ffff;
-    color:black;
+
+background:#00ffff;
+
+color:black;
+
+transform:scale(1.05);
+
 }
 
 
@@ -148,15 +280,17 @@ input{
 <div class="chat" id="chat">
 
 <div class="message ai">
-Nova: Merhaba Berkin 👋 Ben Nova AI.
+Nova: Merhaba Berkin 👋<br>
+Sistemlerim hazır.
 </div>
+
 
 </div>
 
 
 <div class="input-area">
 
-<input id="input" placeholder="Mesajını yaz...">
+<input id="input" placeholder="Nova'ya sor...">
 
 <button class="send" onclick="send()">
 ➤
@@ -167,33 +301,28 @@ Nova: Merhaba Berkin 👋 Ben Nova AI.
 
 <div class="buttons">
 
-<button onclick="command('matematik')">
-🧮 Matematik
+<button onclick="quick('yardım')">
+🧠 Yardım
 </button>
 
-<button onclick="konumAl()">
-📍 Konum
-</button>
-
-<button onclick="command('saat')">
+<button onclick="quick('saat')">
 🕒 Saat
 </button>
 
-<button onclick="command('tarih')">
+<button onclick="quick('tarih')">
 📅 Tarih
+</button>
+
+<button onclick="quick('matematik')">
+🧮 Matematik
 </button>
 
 
 </div>
-
-
-</div>
-
-
 <script>
 
 
-let konum="";
+let konumBilgisi = "";
 
 
 function addMessage(text,type){
@@ -213,146 +342,24 @@ chat.scrollTop=chat.scrollHeight;
 
 
 
-function send(){
-
-let input=document.getElementById("input");
-
-let text=input.value.trim();
-
-if(text=="") return;
-
-
-addMessage("Sen: "+text,"user");
-
-
-let cevap="Bunu henüz bilmiyorum.";
-
-
-text=text.toLowerCase();
-
-
-if(text.includes("merhaba") || text.includes("selam")){
-
-cevap="Merhaba Berkin 👋 Sana nasıl yardımcı olabilirim?";
-
-}
-
-
-else if(text.includes("nasılsın")){
-
-cevap="İyiyim. Sistemlerim aktif çalışıyor. 🤖";
-
-}
-
-
-else if(text.includes("ben kimim")){
-
-cevap="Sen Berkin'sin. NOVA AI kullanıcısı.";
-
-}
-
-
-else if(text.includes("yardım")){
-
-cevap=
-"Yapabildiklerim:<br>"+
-"🧮 Matematik<br>"+
-"🕒 Saat<br>"+
-"📅 Tarih<br>"+
-"📍 Konum<br>"+
-"💬 Sohbet";
-
-}
-
-
-else if(text.includes("saat")){
-
-cevap="Saat: "+new Date().toLocaleTimeString();
-
-}
-
-
-else if(text.includes("tarih")){
-
-cevap="Tarih: "+new Date().toLocaleDateString();
-
-}
-  else if(
-text.includes("+") ||
-text.includes("-") ||
-text.includes("*") ||
-text.includes("/")
-){
-
-try{
-
-cevap="Sonuç: "+eval(text);
-
-}
-
-catch{
-
-cevap="Matematik işlemini anlayamadım.";
-
-}
-
-}
-
-
-else if(text.includes("konum")){
-
-if(konum){
-
-cevap=konum;
-
-}
-
-else{
-
-cevap="Önce 📍 Konum butonuna basıp izin vermelisin.";
-
-}
-
-}
-
-
-else if(text.includes("nova")){
-
-cevap="Buradayım Berkin 🚀";
-
-}
-
-
-
-addThinking(cevap);
-
-
-input.value="";
-
-}
-
-
-
-function addThinking(cevap){
+function thinking(answer){
 
 let chat=document.getElementById("chat");
 
+let wait=document.createElement("div");
 
-let loading=document.createElement("div");
+wait.className="message ai";
 
-loading.className="message ai";
+wait.innerHTML="Nova: düşünüyor... 🤖";
 
-loading.innerHTML="Nova: düşünüyor...";
-
-chat.appendChild(loading);
-
+chat.appendChild(wait);
 
 chat.scrollTop=chat.scrollHeight;
 
 
 setTimeout(()=>{
 
-loading.innerHTML="Nova: "+cevap;
+wait.innerHTML="Nova: "+answer;
 
 },700);
 
@@ -361,26 +368,168 @@ loading.innerHTML="Nova: "+cevap;
 
 
 
-function command(cmd){
 
-if(cmd=="saat"){
+function send(){
 
-document.getElementById("input").value="saat";
+
+let input=document.getElementById("input");
+
+let text=input.value.trim();
+
+
+if(text=="") return;
+
+
+
+addMessage(
+"Sen: "+text,
+"user"
+);
+
+
+
+let soru=text.toLowerCase();
+
+
+let cevap="Bunu henüz bilmiyorum.";
+
+
+
+// SELAMLAMA
+
+if(
+soru.includes("merhaba") ||
+soru.includes("selam")
+){
+
+cevap="Merhaba Berkin 👋 Ben NOVA AI.";
 
 }
 
-else if(cmd=="tarih"){
 
-document.getElementById("input").value="tarih";
+
+// DURUM
+
+else if(
+soru.includes("nasılsın")
+){
+
+cevap="Sistemlerim aktif. Yardım etmeye hazırım.";
 
 }
 
-else if(cmd=="matematik"){
 
-document.getElementById("input").value="25*4";
+
+// KİMLİK
+
+else if(
+soru.includes("ben kimim")
+){
+
+cevap="Sen Berkin'sin. NOVA AI kullanıcısı.";
 
 }
 
+
+
+// SAAT
+
+else if(
+soru.includes("saat")
+){
+
+cevap=
+"Şu an saat: "
++
+new Date().toLocaleTimeString();
+
+}
+
+
+
+// TARİH
+
+else if(
+soru.includes("tarih")
+){
+
+cevap=
+"Bugünün tarihi: "
++
+new Date().toLocaleDateString();
+
+}
+
+
+
+// MATEMATİK
+
+else if(
+/[0-9]/.test(soru) &&
+(
+soru.includes("+") ||
+soru.includes("-") ||
+soru.includes("*") ||
+soru.includes("/")
+)
+
+){
+
+try{
+
+cevap=
+"Sonuç: "
++
+eval(soru);
+
+}
+
+catch{
+
+cevap="Bu işlemi hesaplayamadım.";
+
+}
+
+}
+
+
+
+// YARDIM
+
+else if(
+soru.includes("yardım")
+){
+
+cevap=
+`
+Yapabildiklerim:<br>
+🧮 Matematik<br>
+💬 Sohbet<br>
+🕒 Saat<br>
+📅 Tarih<br>
+📍 Konum<br>
+🧠 Bilgi
+`;
+
+}
+
+
+
+
+thinking(cevap);
+
+
+input.value="";
+
+
+}
+
+
+
+
+function quick(command){
+
+document.getElementById("input").value=command;
 
 send();
 
@@ -388,67 +537,14 @@ send();
 
 
 
-function konumAl(){
 
-if(navigator.geolocation){
+// ENTER İLE GÖNDERME
 
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-
-konum=
-"Konum alındı 🌍<br>"+
-"Enlem: "+
-position.coords.latitude+
-"<br>Boylam: "+
-position.coords.longitude;
-
-
-addMessage(
-"Nova: Konum izni verildi ✅",
-"ai"
-);
-
-
-},
-
-
-function(){
-
-
-addMessage(
-"Nova: Konum izni reddedildi ❌",
-"ai"
-);
-
-
-}
-
-
-);
-
-
-}
-
-else{
-
-
-addMessage(
-"Nova: Cihaz konum desteklemiyor.",
-"ai"
-);
-
-
-}
-
-}
-
-
-
-document.getElementById("input")
-.addEventListener("keydown",function(e){
+document
+.getElementById("input")
+.addEventListener(
+"keydown",
+function(e){
 
 if(e.key==="Enter"){
 
@@ -459,11 +555,256 @@ send();
 });
 
 
+
+
+
+// KONUM İZNİ
+
+
+function konumAl(){
+
+
+if(navigator.geolocation){
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+
+konumBilgisi=
+`
+Konum alındı ✅<br>
+Enlem:
+${position.coords.latitude}<br>
+Boylam:
+${position.coords.longitude}
+`;
+
+
+
+addMessage(
+"Nova: Konum izni verildi 📍",
+"ai"
+);
+
+
+
+},
+
+
+function(){
+
+addMessage(
+"Nova: Konum izni reddedildi.",
+"ai"
+);
+
+
+}
+
+
+);
+
+
+
+}
+
+else{
+
+addMessage(
+"Nova: Cihaz konum desteklemiyor.",
+"ai"
+);
+
+}
+
+
+
+}
+
+
+
+</script>
+<script>
+
+
+// GELİŞMİŞ BİLGİ MOTORU
+
+
+let eskiSend = send;
+
+
+send = function(){
+
+
+let input=document.getElementById("input");
+
+let text=input.value.toLowerCase();
+
+
+
+if(text.includes("türkiye")){
+
+addMessage(
+"Nova: Türkiye'nin başkenti Ankara'dır. Türkiye 7 bölgeden oluşur.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("dünya")){
+
+addMessage(
+"Nova: Dünya, Güneş Sistemi'ndeki üçüncü gezegendir ve yaşam olduğu bilinen tek gezegendir.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("ay")){
+
+addMessage(
+"Nova: Ay, Dünya'nın doğal uydusudur.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("güneş")){
+
+addMessage(
+"Nova: Güneş, Güneş Sistemi'nin merkezindeki yıldızdır.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("mars")){
+
+addMessage(
+"Nova: Mars, kızıl gezegen olarak bilinir.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("yapay zeka") || text.includes("yapay zeka nedir")){
+
+addMessage(
+"Nova: Yapay zeka, bilgisayarların öğrenme ve karar verme yeteneklerini taklit eden teknolojidir.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("bilgisayar")){
+
+addMessage(
+"Nova: Bilgisayar, verileri işleyen elektronik bir cihazdır.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("python")){
+
+addMessage(
+"Nova: Python, öğrenmesi kolay ve çok kullanılan bir programlama dilidir.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+if(text.includes("html")){
+
+addMessage(
+"Nova: HTML, web sayfalarının temel yapısını oluşturur.",
+"ai"
+);
+
+input.value="";
+return;
+
+}
+
+
+
+// NORMAL SİSTEME DEVAM
+
+eskiSend();
+
+}
+
+
+
+
+// KONUM BUTONU EKLEME
+
+
+let buttonArea=document.querySelector(".buttons");
+
+
+let locationButton=document.createElement("button");
+
+locationButton.innerHTML="📍 Konum";
+
+
+locationButton.onclick=function(){
+
+konumAl();
+
+};
+
+
+buttonArea.appendChild(locationButton);
+
+
+
 </script>
 
 
 </body>
-
 </html>
 
 Mesaj gönder...
