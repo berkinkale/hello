@@ -1,176 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>😈 Sürpriz</title>
+<title>Berkin</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
-background:#000;
-overflow:hidden;
+margin:0;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-transition:.2s;
-}
-
-h1{
+background:black;
+overflow:hidden;
+font-family:Arial;
 color:white;
-font-size:60px;
-text-align:center;
-text-shadow:0 0 20px red;
-animation:pulse 1s infinite alternate;
-z-index:5;
-padding:20px;
-}
-
-@keyframes pulse{
-from{transform:scale(1);}
-to{transform:scale(1.08);}
-}
-
-.flash{
-animation:flash .15s infinite;
-}
-
-@keyframes flash{
-0%{background:black;}
-50%{background:#8b0000;}
-100%{background:black;}
-}
-
-.shake{
-animation:shake .08s infinite;
-}
-
-@keyframes shake{
-0%{transform:translate(2px,2px);}
-25%{transform:translate(-2px,-2px);}
-50%{transform:translate(3px,-2px);}
-75%{transform:translate(-3px,2px);}
-100%{transform:translate(2px,-2px);}
-}
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-top:-20px;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{
-transform:translateY(120vh) rotate(720deg);
-opacity:0;
-}
-}
-</style>
-</head>
-
-<body>
-
-<h1 id="yazi">
-😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂
-</h1>
-
-<audio id="mehter">
-<source src="Mehter Marşı Bass Boosted.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-function confetti(){
-for(let i=0;i<300;i++){
-let d=document.createElement("div");
-d.className="confetti";
-d.style.left=Math.random()*100+"vw";
-d.style.background="hsl("+Math.random()*360+",100%,50%)";
-d.style.animationDuration=(2+Math.random()*3)+"s";
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),5000);
-}
-}
-
-setTimeout(()=>{
-
-document.body.classList.add("flash");
-document.body.classList.add("shake");
-
-confetti();
-
-const ses=document.getElementById("mehter");
-
-ses.volume=1;
-
-ses.play().catch(()=>{
-document.getElementById("yazi").innerHTML=
-"🔊 Müziği başlatmak için ekrana bir kez tıkla.<br><br>😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂";
-
-document.body.addEventListener("click",()=>{
-ses.play();
-},{once:true});
-
-});
-
-},3000);
-
-</script>
-
-</body>
-</html>
-
-21:16
-Kendi mesajını yanıtladı
-<!DOCTYPE html> <html lang="tr"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>😈 Sürpriz</title> <style> *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; } body{ background:#000; overflow:hidden; display:flex; justify-content:center; align-items:center; height:100vh; transition:.2s; } h1{ color:white; font-size:60px; text-align:center; text-shadow:0 0 20px red; animation:pulse 1s infinite alternate; z-index:5; padding:20px; } @keyframes pulse{ from{transform:scale(1);} to{transform:scale(1.08);} } .flash{ animation:flash .15s infinite; } @keyframes flash{ 0%{background:black;} 50%{background:#8b0000;} 100%{background:black;} } .shake{ animation:shake .08s infinite; } @keyframes shake{ 0%{transform:translate(2px,2px);} 25%{transform:translate(-2px,-2px);} 50%{transform:translate(3px,-2px);} 75%{transform:translate(-3px,2px);} 100%{transform:translate(2px,-2px);} } .confetti{ position:absolute; width:10px; height:10px; top:-20px; animation:fall linear forwards; } @keyframes fall{ to{ transform:translateY(120vh) rotate(720deg); opacity:0; } } </style> </head> <body> <h1 id="yazi"> 😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂 </h1> <audio id="mehter"> <source src="Mehter Marşı Bass Boosted.mp3" type="audio/mpeg"> </audio> <script> function confetti(){ for(let i=0;i<300;i++){ let d=document.createElement("div"); d.className="confetti"; d.style.left=Math.random()*100+"vw"; d.style.background="hsl("+Math.random()*360+",100%,50%)"; d.style.animationDuration=(2+Math.random()*3)+"s"; document.body.appendChild(d); setTimeout(()=>d.remove(),5000); } } setTimeout(()=>{ document.body.classList.add("flash"); document.body.classList.add("shake"); confetti(); const ses=document.getElementById("mehter"); ses.volume=1; ses.play().catch(()=>{ document.getElementById("yazi").innerHTML= "🔊 Müziği başlatmak için ekrana bir kez tıkla.<br><br>😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂"; document.body.addEventListener("click",()=>{ ses.play(); },{once:true}); }); },3000); </script> </body> </html>
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sürpriz</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-background:#000;
 transition:.2s;
 }
 
 h1{
-color:#fff;
 font-size:60px;
 text-align:center;
 text-shadow:0 0 20px red;
-animation:pulse 1s infinite alternate;
-padding:20px;
+animation:zoom 1s infinite alternate;
 }
 
-@keyframes pulse{
+@keyframes zoom{
 from{transform:scale(1);}
-to{transform:scale(1.08);}
+to{transform:scale(1.1);}
 }
 
 .flash{
@@ -194,61 +52,41 @@ animation:shake .08s infinite;
 75%{transform:translate(-3px,2px);}
 100%{transform:translate(2px,-2px);}
 }
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-top:-20px;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{
-transform:translateY(120vh) rotate(720deg);
-opacity:0;
-}
-}
 </style>
 
 </head>
 <body>
 
-<h1>😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂</h1>
+<h1 id="text">
+😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂
+</h1>
 
-<audio id="music" src="mehter.mp3"></audio>
+<audio id="mehter" preload="auto" loop>
+<source src="mehter.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
-function confetti(){
-for(let i=0;i<250;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"vw";
-c.style.background="hsl("+Math.random()*360+",100%,50%)";
-c.style.animationDuration=(2+Math.random()*3)+"s";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),5000);
-}
-}
+const audio=document.getElementById("mehter");
 
 setTimeout(()=>{
-
 document.body.classList.add("flash");
 document.body.classList.add("shake");
-confetti();
-
-const audio=document.getElementById("music");
 
 audio.play().catch(()=>{
-document.body.onclick=()=>{
-audio.play();
-};
+document.getElementById("text").innerHTML=
+"🎵 Müziği başlatmak için ekrana dokun.<br><br>😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂";
 });
-
 },3000);
+
+document.body.addEventListener("click",()=>{
+audio.play();
+},{once:true});
 
 </script>
 
 </body>
 </html>
+
+Mesaj gönder...
+
