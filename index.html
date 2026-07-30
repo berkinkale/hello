@@ -1,135 +1,214 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NOVA AI</title>
 
+
 <style>
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
     font-family:Arial, sans-serif;
 }
 
+
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    background:
-    linear-gradient(135deg,#020024,#090979,#00d4ff);
-    color:white;
+
+height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
+background:
+linear-gradient(135deg,#020024,#090979,#00d4ff);
+
+color:white;
+
 }
 
 
-/* hareketli ışıklar */
+
+/* hareketli ışık */
 
 body::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#00ffff;
-    filter:blur(150px);
-    opacity:.25;
-    animation:move 8s infinite alternate;
+
+content:"";
+
+position:absolute;
+
+width:600px;
+
+height:600px;
+
+background:#00ffff;
+
+filter:blur(160px);
+
+opacity:.25;
+
+animation:glow 8s infinite alternate;
+
 }
 
 
-@keyframes move{
-    from{
-        transform:translate(-200px,-100px);
-    }
-    to{
-        transform:translate(200px,100px);
-    }
+
+@keyframes glow{
+
+from{
+
+transform:translate(-200px,-150px);
+
 }
+
+
+to{
+
+transform:translate(200px,150px);
+
+}
+
+}
+
 
 
 
 .container{
 
+
 position:relative;
+
 z-index:2;
 
+
 width:95%;
+
 max-width:450px;
 
+
+height:650px;
+
+
 background:
-rgba(255,255,255,0.12);
+
+rgba(255,255,255,0.10);
+
 
 backdrop-filter:blur(20px);
 
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
 border-radius:30px;
+
 
 padding:20px;
 
-border:1px solid rgba(255,255,255,.2);
 
 box-shadow:
-0 0 40px rgba(0,255,255,.6);
+
+0 0 40px rgba(0,255,255,.5);
+
 
 }
+
 
 
 
 .logo{
 
+
 text-align:center;
 
-font-size:38px;
+
+font-size:40px;
+
 
 font-weight:bold;
 
+
 color:#00ffff;
 
+
 text-shadow:
+
 0 0 20px cyan;
+
 
 }
 
 
 
-.subtitle{
+.status{
+
 
 text-align:center;
 
+
+margin:10px;
+
+
 color:#00ff99;
 
-margin-bottom:15px;
 
 }
+
 
 
 
 .chat{
 
-height:350px;
+
+height:430px;
+
 
 overflow-y:auto;
 
+
+padding:15px;
+
+
 background:
+
 rgba(0,0,0,.35);
+
 
 border-radius:20px;
 
-padding:15px;
 
 }
 
 
 
+
 .message{
+
 
 padding:12px;
 
+
 margin:10px 0;
 
+
 border-radius:15px;
+
+
+line-height:1.4;
+
 
 }
 
@@ -137,10 +216,14 @@ border-radius:15px;
 
 .ai{
 
+
 background:
+
 rgba(0,255,150,.12);
 
+
 color:#00ff99;
+
 
 }
 
@@ -148,22 +231,31 @@ color:#00ff99;
 
 .user{
 
+
 background:
+
 rgba(0,200,255,.15);
+
 
 color:#00ffff;
 
+
 text-align:right;
+
 
 }
 
 
 
-.area{
+
+.input-area{
+
 
 display:flex;
 
+
 margin-top:15px;
+
 
 }
 
@@ -171,19 +263,30 @@ margin-top:15px;
 
 input{
 
+
 flex:1;
+
 
 padding:14px;
 
-border-radius:15px;
 
 border:none;
 
+
 outline:none;
+
+
+border-radius:15px;
+
 
 background:#050505;
 
+
 color:white;
+
+
+font-size:15px;
+
 
 }
 
@@ -191,61 +294,40 @@ color:white;
 
 .send{
 
+
 margin-left:10px;
+
 
 padding:14px 20px;
 
-border-radius:15px;
 
 border:none;
 
+
+border-radius:15px;
+
+
 background:#00ffff;
+
+
+cursor:pointer;
+
 
 font-size:18px;
 
-cursor:pointer;
 
 }
 
 
 
-.buttons{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:10px;
-
-margin-top:15px;
-
-}
+.send:hover{
 
 
-
-button{
-
-padding:12px;
-
-border-radius:15px;
-
-border:none;
-
-background:#111;
-
-color:white;
-
-cursor:pointer;
-
-}
+transform:scale(1.05);
 
 
+box-shadow:0 0 20px cyan;
 
-button:hover{
-
-background:#00ffff;
-
-color:black;
 
 }
 
@@ -253,75 +335,77 @@ color:black;
 
 </style>
 
+
 </head>
+
 
 
 <body>
 
 
+
 <div class="container">
 
 
+
 <div class="logo">
+
 🌌 NOVA AI
+
 </div>
 
 
-<div class="subtitle">
-🤖 Akıllı asistan aktif
+
+<div class="status">
+
+🤖 Yapay zeka sistemi hazır
+
 </div>
+
 
 
 <div class="chat" id="chat">
 
+
 <div class="message ai">
+
 Nova: Merhaba Berkin 👋<br>
-Ben NOVA AI. Hazırım.
-</div>
+Yeni nesil asistan sistemi başlatıldı.
 
 </div>
 
 
-<div class="area">
+</div>
 
-<input 
-id="input"
-placeholder="Nova'ya bir şey sor..."
->
+
+
+<div class="input-area">
+
+
+<input id="input" placeholder="Nova'ya mesaj yaz...">
+
 
 <button class="send" onclick="send()">
+
 ➤
+
 </button>
+
 
 </div>
 
 
-<div class="buttons">
-
-<button onclick="quick('yardım')">
-🧠 Yardım
-</button>
-
-<button onclick="quick('saat')">
-🕒 Saat
-</button>
-
-<button onclick="quick('matematik')">
-🧮 Matematik
-</button>
-
-<button onclick="quick('bilgi')">
-🌍 Bilgi
-</button>
 
 </div>
 <script>
+
 
 function addMessage(text,type){
 
 let chat=document.getElementById("chat");
 
 chat.innerHTML +=
+
 `
 <div class="message ${type}">
 ${text}
@@ -338,20 +422,20 @@ function thinking(text){
 
 let chat=document.getElementById("chat");
 
-let wait=document.createElement("div");
+let loading=document.createElement("div");
 
-wait.className="message ai";
+loading.className="message ai";
 
-wait.innerHTML="Nova: düşünüyor... 🤖";
+loading.innerHTML="Nova: düşünüyor... 🤖";
 
-chat.appendChild(wait);
+chat.appendChild(loading);
 
 
 setTimeout(()=>{
 
-wait.innerHTML="Nova: "+text;
+loading.innerHTML="Nova: "+text;
 
-},600);
+},700);
 
 
 }
@@ -367,7 +451,7 @@ let input=document.getElementById("input");
 let soru=input.value.trim();
 
 
-if(soru=="") return;
+if(!soru) return;
 
 
 
@@ -381,126 +465,102 @@ addMessage(
 let mesaj=soru.toLowerCase();
 
 
-let cevap="Bunu henüz bilmiyorum.";
+
+let cevap="Bunu anlamaya çalışıyorum.";
 
 
 
-// SELAMLAŞMA
 
 if(
 mesaj.includes("selam") ||
 mesaj.includes("merhaba")
 ){
 
-cevap="Selam Berkin 👋 NOVA burada. Sana nasıl yardımcı olabilirim?";
+cevap=
+"Merhaba Berkin 👋 Ben NOVA AI. Sana nasıl yardımcı olabilirim?";
 
 }
 
 
-
-// NASILSIN
 
 else if(
 mesaj.includes("naber") ||
 mesaj.includes("nasılsın")
 ){
 
-cevap="İyiyim 😄 Sistemlerim aktif çalışıyor.";
+cevap=
+"İyiyim 😄 Sistemlerim aktif ve çalışmaya hazırım.";
 
 }
 
 
-
-// TEŞEKKÜR
 
 else if(
 mesaj.includes("teşekkür") ||
 mesaj.includes("sağol")
 ){
 
-cevap="Rica ederim Berkin 😊";
-
-}
-
-
-
-// KİMLİK
-
-else if(
-mesaj.includes("ben kimim")
-){
-
-cevap="Sen Berkin'sin. NOVA AI kullanıcısısın.";
-
-}
-
-
-
-// YAŞ
-
-else if(
-mesaj.includes("kaç yaşındasın")
-){
-
-cevap="Benim yaşım yok. Ben bir yapay zekâ asistanıyım.";
-
-}
-
-
-
-// MATEMATİK
-
-else if(
-/[0-9]/.test(mesaj) &&
-(
-mesaj.includes("+") ||
-mesaj.includes("-") ||
-mesaj.includes("*") ||
-mesaj.includes("x") ||
-mesaj.includes("/")
-)
-){
-
-try{
-
-let islem=
-mesaj.replaceAll("x","*");
-
-
 cevap=
-"Sonuç: "+
-eval(islem);
-
-
-}
-
-catch{
-
-cevap="Bu matematik işlemini anlayamadım.";
-
-}
+"Rica ederim Berkin 😊";
 
 }
 
 
-
-// YARDIM
 
 else if(
 mesaj.includes("yardım")
 ){
 
 cevap=
-`
-Yapabildiklerim:<br>
-💬 Sohbet<br>
-🧮 Matematik<br>
-🌍 Bilgi<br>
-🕒 Saat<br>
+"Şu anda sohbet, matematik ve bilgi özelliklerimi kullanabilirsin.";
+
+}
+
+
+
+else if(
+mesaj.includes("sen kimsin")
+||
+mesaj.includes("nesin")
+){
+
+cevap=
+"Ben NOVA AI. Sana yardımcı olmak için tasarlanmış bir yapay zeka asistanıyım.";
+
+}
+
+
+
+thinking(cevap);
+
+
+
+input.value="";
+
+
+}
+
+
+
+
+document
+.getElementById("input")
+.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+
+send();
+
+}
+
+});
+
+
+</script>
 <script>
 
-
-// EK BİLGİ MOTORU
 
 let eskiSend = send;
 
@@ -514,87 +574,50 @@ let soru=input.value.toLowerCase();
 
 
 
-let cevaplar = {
-
-"türkiye":
-"Türkiye'nin başkenti Ankara'dır. Türkiye 7 bölgeden oluşur.",
-
-"istanbul":
-"İstanbul, Türkiye'nin en kalabalık şehridir.",
-
-"ankara":
-"Ankara, Türkiye'nin başkentidir.",
-
-"mars":
-"Mars, kızıl gezegen olarak bilinir.",
-
-"uzay":
-"Uzay, Dünya atmosferinin dışındaki sonsuz boşluktur.",
-
-"güneş":
-"Güneş, Dünya'ya enerji veren bir yıldızdır.",
-
-"ay":
-"Ay, Dünya'nın doğal uydusudur.",
-
-"dünya":
-"Dünya, yaşam olduğu bilinen tek gezegendir.",
-
-"yapay zeka":
-"Yapay zeka, bilgisayarların öğrenme ve karar verme yeteneğidir.",
-
-"bilgisayar":
-"Bilgisayar, verileri işleyen elektronik cihazdır.",
-
-"telefon":
-"Telefon, iletişim kurmayı sağlayan teknolojik cihazdır.",
-
-"internet":
-"İnternet, dünya çapında bağlantı sağlayan büyük ağdır.",
-
-"html":
-"HTML, web sayfalarının temel yapısını oluşturur.",
-
-"css":
-"CSS, web sayfalarının görünümünü düzenler.",
-
-"javascript":
-"JavaScript, web sitelerine hareket ve özellik ekler.",
-
-"python":
-"Python, popüler bir programlama dilidir.",
-
-"robot":
-"Robot, programlanabilen mekanik sistemdir.",
-
-"elektrik":
-"Elektrik, enerji taşıyan fiziksel bir olaydır.",
-
-"su":
-"Su, yaşam için gerekli temel maddelerden biridir.",
-
-"hayvan":
-"Hayvanlar canlı organizmalardır.",
-
-"fenerbahçe":
-"Fenerbahçe, İstanbul merkezli bir spor kulübüdür.",
-
-"galatasaray":
-"Galatasaray, Türkiye'nin önemli spor kulüplerinden biridir.",
-
-"müzik":
-"Müzik, seslerin düzenli birleşimiyle oluşan sanattır."
-
-};
+/* MATEMATİK MOTORU */
 
 
+if(
+/[0-9]/.test(soru) &&
+(
+soru.includes("+") ||
+soru.includes("-") ||
+soru.includes("*") ||
+soru.includes("/") ||
+soru.includes("x")
+)
 
-for(let kelime in cevaplar){
+){
 
-if(soru.includes(kelime)){
+try{
+
+
+let islem=soru.replaceAll("x","*");
+
 
 addMessage(
-"Nova: "+cevaplar[kelime],
+"Sen: "+input.value,
+"user"
+);
+
+
+addMessage(
+"Nova: Sonuç = "+eval(islem),
+"ai"
+);
+
+
+input.value="";
+
+return;
+
+
+}
+
+catch{
+
+addMessage(
+"Nova: Bu işlemi çözemiyorum.",
 "ai"
 );
 
@@ -604,10 +627,104 @@ return;
 
 }
 
+
 }
 
 
-// yukarıdakiler yoksa normal sisteme gönder
+
+
+/* BİLGİ MOTORU */
+
+
+let bilgiler={
+
+
+"türkiye":
+"Türkiye'nin başkenti Ankara'dır. Türkiye Asya ve Avrupa arasında yer alır.",
+
+
+"istanbul":
+"İstanbul, Türkiye'nin en kalabalık şehridir.",
+
+
+"mars":
+"Mars, kızıl gezegen olarak bilinen gezegendir.",
+
+
+"uzay":
+"Uzay, gezegenler, yıldızlar ve galaksilerden oluşan büyük boşluktur.",
+
+
+"güneş":
+"Güneş, Dünya'ya enerji sağlayan bir yıldızdır.",
+
+
+"ay":
+"Ay, Dünya'nın doğal uydusudur.",
+
+
+"yapay zeka":
+"Yapay zeka, bilgisayarların öğrenmesini ve karar vermesini sağlayan teknolojidir.",
+
+
+"bilgisayar":
+"Bilgisayar, bilgileri işleyen elektronik bir cihazdır.",
+
+
+"html":
+"HTML, internet sitelerinin temel yapısını oluşturur.",
+
+
+"css":
+"CSS, internet sitelerinin tasarımını düzenler.",
+
+
+"javascript":
+"JavaScript, web sitelerine hareket ve özellik ekleyen programlama dilidir.",
+
+
+"python":
+"Python, kolay öğrenilen ve çok kullanılan bir programlama dilidir.",
+
+
+"robot":
+"Robotlar, programlanabilen makineleridir."
+
+
+};
+
+
+
+for(let kelime in bilgiler){
+
+
+if(soru.includes(kelime)){
+
+
+addMessage(
+"Sen: "+input.value,
+"user"
+);
+
+
+addMessage(
+"Nova: "+bilgiler[kelime],
+"ai"
+);
+
+
+input.value="";
+
+return;
+
+
+}
+
+
+}
+
+
+// hiçbir şey bulamazsa normal sisteme dön
 
 eskiSend();
 
@@ -621,7 +738,9 @@ eskiSend();
 
 // KONUM SİSTEMİ
 
+
 function konumAl(){
+
 
 if(navigator.geolocation){
 
@@ -646,13 +765,14 @@ position.coords.longitude,
 
 function(){
 
+
 addMessage(
 "Nova: Konum izni reddedildi ❌",
 "ai"
 );
 
-}
 
+}
 
 );
 
@@ -661,68 +781,206 @@ addMessage(
 
 else{
 
+
 addMessage(
-"Nova: Cihaz konum özelliğini desteklemiyor.",
+"Nova: Cihazında konum desteği yok.",
 "ai"
 );
 
-}
 
 }
 
 
+}
 
 
 
-// KONUM BUTONU EKLE
-
-let buttons=document.querySelector(".buttons");
 
 
-let konumButon=document.createElement("button");
-
-konumButon.innerHTML="📍 Konum";
+// HAVA DURUMU KOMUTU
 
 
-konumButon.onclick=function(){
+let eskiSend2=send;
 
-konumAl();
+
+send=function(){
+
+
+let input=document.getElementById("input");
+
+let soru=input.value.toLowerCase();
+
+
+
+if(soru.includes("hava")){
+
+
+addMessage(
+"Sen: "+input.value,
+"user"
+);
+
+
+addMessage(
+"Nova: Hava durumu için konum bilgisi gerekiyor. 📍 Önce konum izni vermelisin.",
+"ai"
+);
+
+
+input.value="";
+
+return;
+
+
+}
+
+
+
+
+// GÖRSEL AI KOMUTU
+
+
+if(
+soru.includes("görsel") ||
+soru.includes("resim") ||
+soru.includes("fotoğraf")
+){
+
+
+addMessage(
+"Sen: "+input.value,
+"user"
+);
+
+
+addMessage(
+"Nova: Görsel oluşturma sistemi hazırlanıyor 🎨",
+"ai"
+);
+
+
+input.value="";
+
+return;
+
+
+}
+
+
+
+eskiSend2();
+
+
+}
+
+
+
+
+// BUTONLAR EKLEME
+
+
+let alan=document.querySelector(".container");
+
+
+let yeniButonlar=document.createElement("div");
+
+
+yeniButonlar.innerHTML=
+
+`
+
+<br>
+
+<button onclick="konumAl()" 
+style="
+width:100%;
+padding:12px;
+border-radius:15px;
+border:none;
+background:#111;
+color:white;
+cursor:pointer;">
+📍 Konum İzni
+</button>
+
+`;
+
+
+
+alan.appendChild(yeniButonlar);
+
+
+
+</script>
+<script>
+
+
+// HIZLI KOMUTLAR
+
+
+document.addEventListener(
+"keydown",
+function(e){
+
+
+if(e.key==="Escape"){
+
+
+addMessage(
+"Nova: Sohbet temizleme özelliği yakında.",
+"ai"
+);
+
+
+}
+
+
+});
+
+
+
+
+
+// BAŞLANGIÇ ANİMASYONU
+
+
+window.onload=function(){
+
+
+let chat=document.getElementById("chat");
+
+
+setTimeout(()=>{
+
+
+addMessage(
+"Nova: Sistem kontrolü tamamlandı ✅",
+"ai"
+);
+
+
+},1000);
+
+
 
 };
 
 
-buttons.appendChild(konumButon);
 
 
 
+// KÜÇÜK MOBİL DÜZENLEME
 
 
-// EK KOMUTLAR
+if(window.innerWidth < 500){
 
 
-let eskiQuick=quick;
-
-
-quick=function(text){
-
-
-if(text=="bilgi"){
-
-document.getElementById("input").value="yardım";
-
-}
-
-else{
-
-document.getElementById("input").value=text;
-
-}
-
-
-send();
+document.querySelector(".container").style.height="95vh";
 
 
 }
+
+
 
 
 
@@ -730,6 +988,8 @@ send();
 
 
 </body>
+
 </html>
+
 
 
