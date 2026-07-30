@@ -3,89 +3,467 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Berkin</title>
+
+<title>NOVA AI</title>
 
 <style>
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-margin:0;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:black;
-overflow:hidden;
-font-family:Arial;
-color:white;
-transition:.2s;
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#050505;
+    color:white;
+    font-family:Arial, sans-serif;
 }
 
-h1{
-font-size:60px;
-text-align:center;
-text-shadow:0 0 20px red;
-animation:zoom 1s infinite alternate;
+
+.container{
+    width:95%;
+    max-width:420px;
+    background:#111;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 0 25px cyan;
 }
 
-@keyframes zoom{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
+
+.logo{
+    text-align:center;
+    font-size:32px;
+    color:#00ffff;
+    font-weight:bold;
 }
 
-.flash{
-animation:flash .2s infinite;
+
+.status{
+    text-align:center;
+    color:#00ff88;
+    margin:10px;
 }
 
-@keyframes flash{
-0%{background:black;}
-50%{background:darkred;}
-100%{background:black;}
+
+.chat{
+    height:350px;
+    overflow-y:auto;
+    background:#070707;
+    border-radius:15px;
+    padding:15px;
 }
 
-.shake{
-animation:shake .08s infinite;
+
+.message{
+    margin:12px 0;
+    padding:10px;
+    border-radius:10px;
 }
 
-@keyframes shake{
-0%{transform:translate(2px,2px);}
-25%{transform:translate(-2px,-2px);}
-50%{transform:translate(3px,-2px);}
-75%{transform:translate(-3px,2px);}
-100%{transform:translate(2px,-2px);}
+
+.ai{
+    color:#00ff88;
 }
+
+
+.user{
+    color:#00ffff;
+    text-align:right;
+}
+
+
+.input-area{
+    display:flex;
+    margin-top:15px;
+}
+
+
+input{
+    flex:1;
+    padding:12px;
+    border-radius:12px;
+    border:none;
+    background:#222;
+    color:white;
+}
+
+
+.send{
+    margin-left:8px;
+    background:#00ffff;
+    border:none;
+    border-radius:12px;
+    padding:12px;
+}
+
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+
+.buttons button{
+    padding:10px;
+    border-radius:12px;
+    border:none;
+    background:#222;
+    color:white;
+}
+
+
+.buttons button:hover{
+    background:#00ffff;
+    color:black;
+}
+
+
 </style>
 
 </head>
+
+
 <body>
 
-<h1 id="text">
-😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂
-</h1>
 
-<audio id="mehter" preload="auto" loop>
-<source src="mehter.mp3" type="audio/mpeg">
-</audio>
+<div class="container">
+
+
+<div class="logo">
+🌌 NOVA AI
+</div>
+
+
+<div class="status">
+🤖 Yapay zeka aktif
+</div>
+
+
+<div class="chat" id="chat">
+
+<div class="message ai">
+Nova: Merhaba Berkin 👋 Ben Nova AI.
+</div>
+
+</div>
+
+
+<div class="input-area">
+
+<input id="input" placeholder="Mesajını yaz...">
+
+<button class="send" onclick="send()">
+➤
+</button>
+
+</div>
+
+
+<div class="buttons">
+
+<button onclick="command('matematik')">
+🧮 Matematik
+</button>
+
+<button onclick="konumAl()">
+📍 Konum
+</button>
+
+<button onclick="command('saat')">
+🕒 Saat
+</button>
+
+<button onclick="command('tarih')">
+📅 Tarih
+</button>
+
+
+</div>
+
+
+</div>
+
 
 <script>
 
-const audio=document.getElementById("mehter");
+
+let konum="";
+
+
+function addMessage(text,type){
+
+let chat=document.getElementById("chat");
+
+chat.innerHTML +=
+`
+<div class="message ${type}">
+${text}
+</div>
+`;
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+
+
+function send(){
+
+let input=document.getElementById("input");
+
+let text=input.value.trim();
+
+if(text=="") return;
+
+
+addMessage("Sen: "+text,"user");
+
+
+let cevap="Bunu henüz bilmiyorum.";
+
+
+text=text.toLowerCase();
+
+
+if(text.includes("merhaba") || text.includes("selam")){
+
+cevap="Merhaba Berkin 👋 Sana nasıl yardımcı olabilirim?";
+
+}
+
+
+else if(text.includes("nasılsın")){
+
+cevap="İyiyim. Sistemlerim aktif çalışıyor. 🤖";
+
+}
+
+
+else if(text.includes("ben kimim")){
+
+cevap="Sen Berkin'sin. NOVA AI kullanıcısı.";
+
+}
+
+
+else if(text.includes("yardım")){
+
+cevap=
+"Yapabildiklerim:<br>"+
+"🧮 Matematik<br>"+
+"🕒 Saat<br>"+
+"📅 Tarih<br>"+
+"📍 Konum<br>"+
+"💬 Sohbet";
+
+}
+
+
+else if(text.includes("saat")){
+
+cevap="Saat: "+new Date().toLocaleTimeString();
+
+}
+
+
+else if(text.includes("tarih")){
+
+cevap="Tarih: "+new Date().toLocaleDateString();
+
+}
+  else if(
+text.includes("+") ||
+text.includes("-") ||
+text.includes("*") ||
+text.includes("/")
+){
+
+try{
+
+cevap="Sonuç: "+eval(text);
+
+}
+
+catch{
+
+cevap="Matematik işlemini anlayamadım.";
+
+}
+
+}
+
+
+else if(text.includes("konum")){
+
+if(konum){
+
+cevap=konum;
+
+}
+
+else{
+
+cevap="Önce 📍 Konum butonuna basıp izin vermelisin.";
+
+}
+
+}
+
+
+else if(text.includes("nova")){
+
+cevap="Buradayım Berkin 🚀";
+
+}
+
+
+
+addThinking(cevap);
+
+
+input.value="";
+
+}
+
+
+
+function addThinking(cevap){
+
+let chat=document.getElementById("chat");
+
+
+let loading=document.createElement("div");
+
+loading.className="message ai";
+
+loading.innerHTML="Nova: düşünüyor...";
+
+chat.appendChild(loading);
+
+
+chat.scrollTop=chat.scrollHeight;
+
 
 setTimeout(()=>{
-document.body.classList.add("flash");
-document.body.classList.add("shake");
 
-audio.play().catch(()=>{
-document.getElementById("text").innerHTML=
-"🎵 Müziği başlatmak için ekrana dokun.<br><br>😂 BERKİN TARAFINDAN TROLLENDİNİZ 😂";
+loading.innerHTML="Nova: "+cevap;
+
+},700);
+
+
+}
+
+
+
+function command(cmd){
+
+if(cmd=="saat"){
+
+document.getElementById("input").value="saat";
+
+}
+
+else if(cmd=="tarih"){
+
+document.getElementById("input").value="tarih";
+
+}
+
+else if(cmd=="matematik"){
+
+document.getElementById("input").value="25*4";
+
+}
+
+
+send();
+
+}
+
+
+
+function konumAl(){
+
+if(navigator.geolocation){
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+
+konum=
+"Konum alındı 🌍<br>"+
+"Enlem: "+
+position.coords.latitude+
+"<br>Boylam: "+
+position.coords.longitude;
+
+
+addMessage(
+"Nova: Konum izni verildi ✅",
+"ai"
+);
+
+
+},
+
+
+function(){
+
+
+addMessage(
+"Nova: Konum izni reddedildi ❌",
+"ai"
+);
+
+
+}
+
+
+);
+
+
+}
+
+else{
+
+
+addMessage(
+"Nova: Cihaz konum desteklemiyor.",
+"ai"
+);
+
+
+}
+
+}
+
+
+
+document.getElementById("input")
+.addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+send();
+
+}
+
 });
-},3000);
 
-document.body.addEventListener("click",()=>{
-audio.play();
-},{once:true});
 
 </script>
 
+
 </body>
+
 </html>
 
-
+Mesaj gönder...
