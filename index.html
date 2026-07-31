@@ -1,995 +1,771 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NOVA AI</title>
+<title>N.O.V.A AI</title>
 
+<link rel="stylesheet" href="style.css">
+</head>
 
-<style>
+<body>
 
+<div id="bootScreen">
+
+<div id="terminal">
+
+<div id="bootText"></div>
+
+</div>
+
+</div>
+
+<div id="novaLogo">
+
+<div id="letters">
+
+<span>N</span>
+<span>O</span>
+<span>V</span>
+<span>A</span>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Consolas, monospace;
 }
-
 
 body{
+    background:#000;
+    overflow:hidden;
+    color:#00ff88;
+}
 
-height:100vh;
+#bootScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-display:flex;
+#terminal{
+    width:90%;
+    height:90%;
+    border:1px solid #00ff88;
+    padding:20px;
+    overflow:hidden;
+    box-shadow:0 0 25px #00ff88;
+}
 
-align-items:center;
+#bootText{
+    white-space:pre-line;
+    font-size:18px;
+    line-height:30px;
+}
 
-justify-content:center;
+.cursor{
+    animation:blink .8s infinite;
+}
 
-overflow:hidden;
+@keyframes blink{
+50%{
+opacity:0;
+}
+}
 
-background:
-linear-gradient(135deg,#020024,#090979,#00d4ff);
+#novaLogo{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:black;
+    color:white;
+}
 
-color:white;
+#letters{
+    display:flex;
+    gap:20px;
+    margin-bottom:40px;
+}
+
+#letters span{
+    width:90px;
+    height:90px;
+    border:2px solid #00ffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+    color:#00ffff;
+    box-shadow:0 0 20px cyan;
+    opacity:0;
+    transform:scale(.5);
+    transition:.5s;
+}
+
+#novaLogo h1{
+    font-size:70px;
+    color:#00ffff;
+    letter-spacing:15px;
+    text-shadow:0 0 30px cyan;
+    opacity:0;
+}
+
+#novaLogo p{
+    margin-top:20px;
+    color:#bbb;
+    font-size:22px;
+    opacity:0;
+}
+const bootText = document.getElementById("bootText");
+
+const lines = [
+"> Boot Sequence Started...",
+"> Checking Hardware..................OK",
+"> CPU...............................OK",
+"> GPU...............................OK",
+"> Memory............................OK",
+"> Initializing AI Core...",
+"> Loading Neural Network...",
+"> Loading Voice Engine...",
+"> Loading Emotion Engine...",
+"> Loading Conversation Engine...",
+"> Loading Security Module...",
+"> Connecting...",
+"> Authentication...",
+"> Developer : Berkin KALE 👑",
+"> AI Version : 1.0",
+"> AI Status : Stable",
+"> N.O.V.A Core Initializing...",
+"> Please Wait..."
+];
+
+let lineIndex = 0;
+
+function typeLine() {
+
+    if(lineIndex >= lines.length){
+
+        setTimeout(showNova,1000);
+
+        return;
+
+    }
+
+    let line = lines[lineIndex];
+
+    let i = 0;
+
+    let div = document.createElement("div");
+
+    bootText.appendChild(div);
+
+    function typing(){
+
+        if(i < line.length){
+
+            div.innerHTML =
+            line.substring(0,i+1) +
+            '<span class="cursor">█</span>';
+
+            i++;
+
+            setTimeout(typing,25);
+
+        }else{
+
+            div.innerHTML=line;
+
+            lineIndex++;
+
+            bootText.scrollTop=bootText.scrollHeight;
+
+            setTimeout(typeLine,120);
+
+        }
+
+    }
+
+    typing();
 
 }
 
+typeLine();
 
+function showNova(){
 
-/* hareketli ışık */
+    document.getElementById("bootScreen").style.display="none";
 
-body::before{
+    const logo=document.getElementById("novaLogo");
 
-content:"";
+    logo.style.display="flex";
 
-position:absolute;
+    const letters=document.querySelectorAll("#letters span");
 
-width:600px;
+    let index=0;
 
-height:600px;
+    function nextLetter(){
 
-background:#00ffff;
+        if(index<letters.length){
 
-filter:blur(160px);
+            letters[index].style.opacity="1";
+            letters[index].style.transform="scale(1)";
 
-opacity:.25;
+            index++;
 
-animation:glow 8s infinite alternate;
+            setTimeout(nextLetter,450);
+
+        }else{
+
+            setTimeout(()=>{
+
+                document.querySelector("#novaLogo h1").style.opacity="1";
+                document.querySelector("#novaLogo p").style.opacity="1";
+
+            },500);
+
+        }
+
+    }
+
+    nextLetter();
+
+}
+<div id="aiCore">
+
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+    <div class="ring ring3"></div>
+
+    <div class="core"></div>
+
+</div>
+/* AI CORE */
+
+#aiCore{
+
+    position:relative;
+
+    width:300px;
+    height:300px;
+
+    margin-bottom:50px;
 
 }
 
+.core{
 
+    position:absolute;
 
-@keyframes glow{
+    width:90px;
+    height:90px;
+
+    background:cyan;
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+    0 0 25px cyan,
+    0 0 60px cyan,
+    0 0 120px cyan;
+
+    animation:pulse 2s infinite;
+
+}
+
+.ring{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    border:2px solid cyan;
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%);
+
+}
+
+.ring1{
+
+    width:140px;
+    height:140px;
+
+    animation:spin 6s linear infinite;
+
+}
+
+.ring2{
+
+    width:200px;
+    height:200px;
+
+    animation:spinReverse 9s linear infinite;
+
+}
+
+.ring3{
+
+    width:260px;
+    height:260px;
+
+    animation:spin 14s linear infinite;
+
+}
+
+@keyframes spin{
 
 from{
 
-transform:translate(-200px,-150px);
+transform:translate(-50%,-50%) rotate(0deg);
 
 }
-
 
 to{
 
-transform:translate(200px,150px);
+transform:translate(-50%,-50%) rotate(360deg);
 
 }
 
 }
 
+@keyframes spinReverse{
 
+from{
 
-
-.container{
-
-
-position:relative;
-
-z-index:2;
-
-
-width:95%;
-
-max-width:450px;
-
-
-height:650px;
-
-
-background:
-
-rgba(255,255,255,0.10);
-
-
-backdrop-filter:blur(20px);
-
-
-border:
-
-1px solid rgba(255,255,255,.25);
-
-
-border-radius:30px;
-
-
-padding:20px;
-
-
-box-shadow:
-
-0 0 40px rgba(0,255,255,.5);
-
+transform:translate(-50%,-50%) rotate(360deg);
 
 }
 
+to{
 
-
-
-.logo{
-
-
-text-align:center;
-
-
-font-size:40px;
-
-
-font-weight:bold;
-
-
-color:#00ffff;
-
-
-text-shadow:
-
-0 0 20px cyan;
-
+transform:translate(-50%,-50%) rotate(0deg);
 
 }
 
+}
 
+@keyframes pulse{
 
-.status{
+0%{
 
-
-text-align:center;
-
-
-margin:10px;
-
-
-color:#00ff99;
-
+transform:translate(-50%,-50%) scale(1);
 
 }
 
+50%{
 
-
-
-.chat{
-
-
-height:430px;
-
-
-overflow-y:auto;
-
-
-padding:15px;
-
-
-background:
-
-rgba(0,0,0,.35);
-
-
-border-radius:20px;
-
+transform:translate(-50%,-50%) scale(1.12);
 
 }
 
+100%{
 
-
-
-.message{
-
-
-padding:12px;
-
-
-margin:10px 0;
-
-
-border-radius:15px;
-
-
-line-height:1.4;
-
+transform:translate(-50%,-50%) scale(1);
 
 }
 
+}
+<div id="stars"></div
+/* ========================= */
+/* STARS */
+/* ========================= */
 
+#stars{
 
-.ai{
+position:fixed;
 
+left:0;
+top:0;
 
-background:
+width:100%;
+height:100%;
 
-rgba(0,255,150,.12);
+pointer-events:none;
 
+overflow:hidden;
 
-color:#00ff99;
-
+z-index:-1;
 
 }
 
+.star{
 
+position:absolute;
 
-.user{
-
-
-background:
-
-rgba(0,200,255,.15);
-
-
-color:#00ffff;
-
-
-text-align:right;
-
-
-}
-
-
-
-
-.input-area{
-
-
-display:flex;
-
-
-margin-top:15px;
-
-
-}
-
-
-
-input{
-
-
-flex:1;
-
-
-padding:14px;
-
-
-border:none;
-
-
-outline:none;
-
-
-border-radius:15px;
-
-
-background:#050505;
-
-
-color:white;
-
-
-font-size:15px;
-
-
-}
-
-
-
-.send{
-
-
-margin-left:10px;
-
-
-padding:14px 20px;
-
-
-border:none;
-
-
-border-radius:15px;
-
+width:2px;
+height:2px;
 
 background:#00ffff;
 
+border-radius:50%;
 
-cursor:pointer;
+box-shadow:0 0 8px cyan;
 
-
-font-size:18px;
-
-
-}
-
-
-
-.send:hover{
-
-
-transform:scale(1.05);
-
-
-box-shadow:0 0 20px cyan;
-
+animation:twinkle linear infinite;
 
 }
 
+@keyframes twinkle{
 
+0%{
 
-</style>
+opacity:.2;
+transform:scale(.5);
 
+}
 
-</head>
+50%{
 
+opacity:1;
+transform:scale(1.8);
 
+}
 
-<body>
+100%{
 
+opacity:.2;
+transform:scale(.5);
 
+}
 
-<div class="container">
-
-
-
-<div class="logo">
-
-🌌 NOVA AI
-
+}
+<div class="orbit orbit1">
+    <div class="particle"></div>
 </div>
 
-
-
-<div class="status">
-
-🤖 Yapay zeka sistemi hazır
-
+<div class="orbit orbit2">
+    <div class="particle"></div>
 </div>
 
-
-
-<div class="chat" id="chat">
-
-
-<div class="message ai">
-
-Nova: Merhaba Berkin 👋<br>
-Yeni nesil asistan sistemi başlatıldı.
-
+<div class="orbit orbit3">
+    <div class="particle"></div>
 </div>
 
+<div id="coreStatus">
+    AI CORE ONLINE
+</div>
+<div id="hexGrid"></div>
+
+<div id="scanLine"></div>
+
+<div id="systemReady">
+SYSTEM READY
+</div>
+/* =======================
+HEX GRID
+======================= */
+
+#hexGrid{
+
+position:absolute;
+
+left:50%;
+top:50%;
+
+width:340px;
+height:340px;
+
+transform:translate(-50%,-50%);
+
+border:2px dashed rgba(0,255,255,.15);
+
+border-radius:50%;
+
+animation:spin 35s linear infinite;
+
+}
+
+/* =======================
+SCAN LINE
+======================= */
+
+#scanLine{
+
+position:absolute;
+
+left:50%;
+top:50%;
+
+width:320px;
+height:2px;
+
+background:cyan;
+
+box-shadow:
+
+0 0 20px cyan,
+
+0 0 50px cyan;
+
+transform:translate(-50%,-50%);
+
+animation:scan 3s infinite;
+
+}
+
+@keyframes scan{
+
+0%{
+
+transform:translate(-50%,-140px);
+
+opacity:.2;
+
+}
+
+50%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translate(-50%,140px);
+
+opacity:.2;
+
+}
+
+}
+
+/* =======================
+SYSTEM READY
+======================= */
+
+#systemReady{
+
+position:absolute;
+
+top:-70px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:16px;
+
+letter-spacing:5px;
+
+color:#00ffff;
+
+text-shadow:0 0 20px cyan;
+
+animation:blinkReady 2s infinite;
+
+}
+
+@keyframes blinkReady{
+
+0%{
+
+opacity:.3;
+
+}
+
+50%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:.3;
+
+}
+<div class="core">
+
+    <div class="innerCore"></div>
+
+    <div class="energyWave"></div>
 
 </div>
+.innerCore{
 
+position:absolute;
 
+left:50%;
+top:50%;
 
-<div class="input-area">
+width:35px;
+height:35px;
 
+transform:translate(-50%,-50%);
 
-<input id="input" placeholder="Nova'ya mesaj yaz...">
+background:white;
 
+border-radius:50%;
 
-<button class="send" onclick="send()">
+box-shadow:
+0 0 20px cyan,
+0 0 40px cyan,
+0 0 80px cyan;
 
-➤
+animation:innerPulse 1.8s infinite;
 
-</button>
+}
 
+.energyWave{
+
+position:absolute;
+
+left:50%;
+top:50%;
+
+width:90px;
+height:90px;
+
+transform:translate(-50%,-50%);
+
+border:2px solid cyan;
+
+border-radius:50%;
+
+animation:wave 2.5s infinite;
+
+}
+
+@keyframes wave{
+
+0%{
+
+opacity:1;
+
+transform:
+translate(-50%,-50%)
+scale(.5);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+translate(-50%,-50%)
+scale(2.3);
+
+}
+
+}
+
+@keyframes innerPulse{
+
+0%{
+
+transform:
+translate(-50%,-50%)
+scale(.8);
+
+}
+
+50%{
+
+transform:
+translate(-50%,-50%)
+scale(1.15);
+
+}
+
+100%{
+
+transform:
+translate(-50%,-50%)
+scale(.8);
+
+}
+
+}
+<!-- ANA PANEL -->
+<div id="mainPanel" class="hidden">
+
+    <div class="topBar">
+        <h1>BERKIN AI SYSTEM</h1>
+        <span class="status">● ONLINE</span>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>AI CORE</h2>
+            <p>Yapay zeka sistemi aktif.</p>
+            <button>Başlat</button>
+        </div>
+
+        <div class="card">
+            <h2>COMMAND</h2>
+            <p>Komut merkezi hazır.</p>
+            <button>Komut Gir</button>
+        </div>
+
+        <div class="card">
+            <h2>SYSTEM</h2>
+            <p>Tüm sistemler kontrol altında.</p>
+            <button>Kontrol</button>
+        </div>
+
+    </div>
 
 </div>
-
-
-
-</div>
-<script>
-
-
-function addMessage(text,type){
-
-let chat=document.getElementById("chat");
-
-chat.innerHTML +=
-
-`
-<div class="message ${type}">
-${text}
-</div>
-`;
-
-chat.scrollTop=chat.scrollHeight;
-
+.hidden{
+    display:none;
 }
 
-
-
-function thinking(text){
-
-let chat=document.getElementById("chat");
-
-let loading=document.createElement("div");
-
-loading.className="message ai";
-
-loading.innerHTML="Nova: düşünüyor... 🤖";
-
-chat.appendChild(loading);
-
-
-setTimeout(()=>{
-
-loading.innerHTML="Nova: "+text;
-
-},700);
-
-
+#mainPanel{
+    color:white;
+    padding:30px;
 }
 
-
-
-
-function send(){
-
-
-let input=document.getElementById("input");
-
-let soru=input.value.trim();
-
-
-if(!soru) return;
-
-
-
-addMessage(
-"Sen: "+soru,
-"user"
-);
-
-
-
-let mesaj=soru.toLowerCase();
-
-
-
-let cevap="Bunu anlamaya çalışıyorum.";
-
-
-
-
-if(
-mesaj.includes("selam") ||
-mesaj.includes("merhaba")
-){
-
-cevap=
-"Merhaba Berkin 👋 Ben NOVA AI. Sana nasıl yardımcı olabilirim?";
-
+.topBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #00ffff;
+    padding-bottom:15px;
 }
 
-
-
-else if(
-mesaj.includes("naber") ||
-mesaj.includes("nasılsın")
-){
-
-cevap=
-"İyiyim 😄 Sistemlerim aktif ve çalışmaya hazırım.";
-
+.status{
+    color:#00ff88;
 }
 
-
-
-else if(
-mesaj.includes("teşekkür") ||
-mesaj.includes("sağol")
-){
-
-cevap=
-"Rica ederim Berkin 😊";
-
+.cards{
+    display:flex;
+    gap:20px;
+    margin-top:30px;
 }
 
-
-
-else if(
-mesaj.includes("yardım")
-){
-
-cevap=
-"Şu anda sohbet, matematik ve bilgi özelliklerimi kullanabilirsin.";
-
+.card{
+    background:rgba(0,0,0,0.5);
+    border:1px solid #00ffff;
+    padding:20px;
+    width:250px;
+    border-radius:15px;
+    box-shadow:0 0 15px #00ffff;
 }
 
-
-
-else if(
-mesaj.includes("sen kimsin")
-||
-mesaj.includes("nesin")
-){
-
-cevap=
-"Ben NOVA AI. Sana yardımcı olmak için tasarlanmış bir yapay zeka asistanıyım.";
-
-}
-
-
-
-thinking(cevap);
-
-
-
-input.value="";
-
-
-}
-
-
-
-
-document
-.getElementById("input")
-.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Enter"){
-
-send();
-
-}
-
-});
-
-
-</script>
-<script>
-
-
-let eskiSend = send;
-
-
-send = function(){
-
-
-let input=document.getElementById("input");
-
-let soru=input.value.toLowerCase();
-
-
-
-/* MATEMATİK MOTORU */
-
-
-if(
-/[0-9]/.test(soru) &&
-(
-soru.includes("+") ||
-soru.includes("-") ||
-soru.includes("*") ||
-soru.includes("/") ||
-soru.includes("x")
-)
-
-){
-
-try{
-
-
-let islem=soru.replaceAll("x","*");
-
-
-addMessage(
-"Sen: "+input.value,
-"user"
-);
-
-
-addMessage(
-"Nova: Sonuç = "+eval(islem),
-"ai"
-);
-
-
-input.value="";
-
-return;
-
-
-}
-
-catch{
-
-addMessage(
-"Nova: Bu işlemi çözemiyorum.",
-"ai"
-);
-
-input.value="";
-
-return;
-
-}
-
-
-}
-
-
-
-
-/* BİLGİ MOTORU */
-
-
-let bilgiler={
-
-
-"türkiye":
-"Türkiye'nin başkenti Ankara'dır. Türkiye Asya ve Avrupa arasında yer alır.",
-
-
-"istanbul":
-"İstanbul, Türkiye'nin en kalabalık şehridir.",
-
-
-"mars":
-"Mars, kızıl gezegen olarak bilinen gezegendir.",
-
-
-"uzay":
-"Uzay, gezegenler, yıldızlar ve galaksilerden oluşan büyük boşluktur.",
-
-
-"güneş":
-"Güneş, Dünya'ya enerji sağlayan bir yıldızdır.",
-
-
-"ay":
-"Ay, Dünya'nın doğal uydusudur.",
-
-
-"yapay zeka":
-"Yapay zeka, bilgisayarların öğrenmesini ve karar vermesini sağlayan teknolojidir.",
-
-
-"bilgisayar":
-"Bilgisayar, bilgileri işleyen elektronik bir cihazdır.",
-
-
-"html":
-"HTML, internet sitelerinin temel yapısını oluşturur.",
-
-
-"css":
-"CSS, internet sitelerinin tasarımını düzenler.",
-
-
-"javascript":
-"JavaScript, web sitelerine hareket ve özellik ekleyen programlama dilidir.",
-
-
-"python":
-"Python, kolay öğrenilen ve çok kullanılan bir programlama dilidir.",
-
-
-"robot":
-"Robotlar, programlanabilen makineleridir."
-
-
-};
-
-
-
-for(let kelime in bilgiler){
-
-
-if(soru.includes(kelime)){
-
-
-addMessage(
-"Sen: "+input.value,
-"user"
-);
-
-
-addMessage(
-"Nova: "+bilgiler[kelime],
-"ai"
-);
-
-
-input.value="";
-
-return;
-
-
-}
-
-
-}
-
-
-// hiçbir şey bulamazsa normal sisteme dön
-
-eskiSend();
-
-
-}
-
-
-</script>
-<script>
-
-
-// KONUM SİSTEMİ
-
-
-function konumAl(){
-
-
-if(navigator.geolocation){
-
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-
-addMessage(
-"Nova: Konum izni verildi ✅<br>"+
-"Enlem: "+
-position.coords.latitude+
-"<br>Boylam: "+
-position.coords.longitude,
-"ai"
-);
-
-
-},
-
-
-function(){
-
-
-addMessage(
-"Nova: Konum izni reddedildi ❌",
-"ai"
-);
-
-
-}
-
-);
-
-
-}
-
-else{
-
-
-addMessage(
-"Nova: Cihazında konum desteği yok.",
-"ai"
-);
-
-
-}
-
-
-}
-
-
-
-
-
-// HAVA DURUMU KOMUTU
-
-
-let eskiSend2=send;
-
-
-send=function(){
-
-
-let input=document.getElementById("input");
-
-let soru=input.value.toLowerCase();
-
-
-
-if(soru.includes("hava")){
-
-
-addMessage(
-"Sen: "+input.value,
-"user"
-);
-
-
-addMessage(
-"Nova: Hava durumu için konum bilgisi gerekiyor. 📍 Önce konum izni vermelisin.",
-"ai"
-);
-
-
-input.value="";
-
-return;
-
-
-}
-
-
-
-
-// GÖRSEL AI KOMUTU
-
-
-if(
-soru.includes("görsel") ||
-soru.includes("resim") ||
-soru.includes("fotoğraf")
-){
-
-
-addMessage(
-"Sen: "+input.value,
-"user"
-);
-
-
-addMessage(
-"Nova: Görsel oluşturma sistemi hazırlanıyor 🎨",
-"ai"
-);
-
-
-input.value="";
-
-return;
-
-
-}
-
-
-
-eskiSend2();
-
-
-}
-
-
-
-
-// BUTONLAR EKLEME
-
-
-let alan=document.querySelector(".container");
-
-
-let yeniButonlar=document.createElement("div");
-
-
-yeniButonlar.innerHTML=
-
-`
-
-<br>
-
-<button onclick="konumAl()" 
-style="
-width:100%;
-padding:12px;
-border-radius:15px;
-border:none;
-background:#111;
-color:white;
-cursor:pointer;">
-📍 Konum İzni
-</button>
-
-`;
-
-
-
-alan.appendChild(yeniButonlar);
-
-
-
-</script>
-<script>
-
-
-// HIZLI KOMUTLAR
-
-
-document.addEventListener(
-"keydown",
-function(e){
-
-
-if(e.key==="Escape"){
-
-
-addMessage(
-"Nova: Sohbet temizleme özelliği yakında.",
-"ai"
-);
-
-
-}
-
-
-});
-
-
-
-
-
-// BAŞLANGIÇ ANİMASYONU
-
-
-window.onload=function(){
-
-
-let chat=document.getElementById("chat");
-
-
-setTimeout(()=>{
-
-
-addMessage(
-"Nova: Sistem kontrolü tamamlandı ✅",
-"ai"
-);
-
-
-},1000);
-
-
-
-};
-
-
-
-
-
-// KÜÇÜK MOBİL DÜZENLEME
-
-
-if(window.innerWidth < 500){
-
-
-document.querySelector(".container").style.height="95vh";
-
-
-}
-
-
-
-
-
-</script>
-
-
-</body>
-
-</html>
-
-
-
+.card button{
+    background:#00ffff;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+    border-radius:8px;
+}setTimeout(function(){
+
+    document.getElementById("mainPanel").classList.remove("hidden");
+
+},5000);
