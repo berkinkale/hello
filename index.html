@@ -1,771 +1,249 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>N.O.V.A AI</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div id="bootScreen">
-
-<div id="terminal">
-
-<div id="bootText"></div>
-
-</div>
-
-</div>
-
-<div id="novaLogo">
-
-<div id="letters">
-
-<span>N</span>
-<span>O</span>
-<span>V</span>
-<span>A</span>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Consolas, monospace;
-}
-
-body{
-    background:#000;
-    overflow:hidden;
-    color:#00ff88;
-}
-
-#bootScreen{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-#terminal{
-    width:90%;
-    height:90%;
-    border:1px solid #00ff88;
-    padding:20px;
-    overflow:hidden;
-    box-shadow:0 0 25px #00ff88;
-}
-
-#bootText{
-    white-space:pre-line;
-    font-size:18px;
-    line-height:30px;
-}
-
-.cursor{
-    animation:blink .8s infinite;
-}
-
-@keyframes blink{
-50%{
-opacity:0;
-}
-}
-
-#novaLogo{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:black;
-    color:white;
-}
-
-#letters{
-    display:flex;
-    gap:20px;
-    margin-bottom:40px;
-}
-
-#letters span{
-    width:90px;
-    height:90px;
-    border:2px solid #00ffff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:42px;
-    color:#00ffff;
-    box-shadow:0 0 20px cyan;
-    opacity:0;
-    transform:scale(.5);
-    transition:.5s;
-}
-
-#novaLogo h1{
-    font-size:70px;
-    color:#00ffff;
-    letter-spacing:15px;
-    text-shadow:0 0 30px cyan;
-    opacity:0;
-}
-
-#novaLogo p{
-    margin-top:20px;
-    color:#bbb;
-    font-size:22px;
-    opacity:0;
-}
-const bootText = document.getElementById("bootText");
-
-const lines = [
-"> Boot Sequence Started...",
-"> Checking Hardware..................OK",
-"> CPU...............................OK",
-"> GPU...............................OK",
-"> Memory............................OK",
-"> Initializing AI Core...",
-"> Loading Neural Network...",
-"> Loading Voice Engine...",
-"> Loading Emotion Engine...",
-"> Loading Conversation Engine...",
-"> Loading Security Module...",
-"> Connecting...",
-"> Authentication...",
-"> Developer : Berkin KALE 👑",
-"> AI Version : 1.0",
-"> AI Status : Stable",
-"> N.O.V.A Core Initializing...",
-"> Please Wait..."
-];
-
-let lineIndex = 0;
-
-function typeLine() {
-
-    if(lineIndex >= lines.length){
-
-        setTimeout(showNova,1000);
-
-        return;
-
-    }
-
-    let line = lines[lineIndex];
-
-    let i = 0;
-
-    let div = document.createElement("div");
-
-    bootText.appendChild(div);
-
-    function typing(){
-
-        if(i < line.length){
-
-            div.innerHTML =
-            line.substring(0,i+1) +
-            '<span class="cursor">█</span>';
-
-            i++;
-
-            setTimeout(typing,25);
-
-        }else{
-
-            div.innerHTML=line;
-
-            lineIndex++;
-
-            bootText.scrollTop=bootText.scrollHeight;
-
-            setTimeout(typeLine,120);
-
-        }
-
-    }
-
-    typing();
-
-}
-
-typeLine();
-
-function showNova(){
-
-    document.getElementById("bootScreen").style.display="none";
-
-    const logo=document.getElementById("novaLogo");
-
-    logo.style.display="flex";
-
-    const letters=document.querySelectorAll("#letters span");
-
-    let index=0;
-
-    function nextLetter(){
-
-        if(index<letters.length){
-
-            letters[index].style.opacity="1";
-            letters[index].style.transform="scale(1)";
-
-            index++;
-
-            setTimeout(nextLetter,450);
-
-        }else{
-
-            setTimeout(()=>{
-
-                document.querySelector("#novaLogo h1").style.opacity="1";
-                document.querySelector("#novaLogo p").style.opacity="1";
-
-            },500);
-
-        }
-
-    }
-
-    nextLetter();
-
-}
-<div id="aiCore">
-
-    <div class="ring ring1"></div>
-    <div class="ring ring2"></div>
-    <div class="ring ring3"></div>
-
-    <div class="core"></div>
-
-</div>
-/* AI CORE */
-
-#aiCore{
-
-    position:relative;
-
-    width:300px;
-    height:300px;
-
-    margin-bottom:50px;
-
-}
-
-.core{
-
-    position:absolute;
-
-    width:90px;
-    height:90px;
-
-    background:cyan;
-
-    border-radius:50%;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    box-shadow:
-    0 0 25px cyan,
-    0 0 60px cyan,
-    0 0 120px cyan;
-
-    animation:pulse 2s infinite;
-
-}
-
-.ring{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    border:2px solid cyan;
-
-    border-radius:50%;
-
-    transform:translate(-50%,-50%);
-
-}
-
-.ring1{
-
-    width:140px;
-    height:140px;
-
-    animation:spin 6s linear infinite;
-
-}
-
-.ring2{
-
-    width:200px;
-    height:200px;
-
-    animation:spinReverse 9s linear infinite;
-
-}
-
-.ring3{
-
-    width:260px;
-    height:260px;
-
-    animation:spin 14s linear infinite;
-
-}
-
-@keyframes spin{
-
-from{
-
-transform:translate(-50%,-50%) rotate(0deg);
-
-}
-
-to{
-
-transform:translate(-50%,-50%) rotate(360deg);
-
-}
-
-}
-
-@keyframes spinReverse{
-
-from{
-
-transform:translate(-50%,-50%) rotate(360deg);
-
-}
-
-to{
-
-transform:translate(-50%,-50%) rotate(0deg);
-
-}
-
-}
-
-@keyframes pulse{
-
-0%{
-
-transform:translate(-50%,-50%) scale(1);
-
-}
-
-50%{
-
-transform:translate(-50%,-50%) scale(1.12);
-
-}
-
-100%{
-
-transform:translate(-50%,-50%) scale(1);
-
-}
-
-}
-<div id="stars"></div
-/* ========================= */
-/* STARS */
-/* ========================= */
-
-#stars{
-
-position:fixed;
-
-left:0;
-top:0;
-
-width:100%;
-height:100%;
-
-pointer-events:none;
-
-overflow:hidden;
-
-z-index:-1;
-
-}
-
-.star{
-
-position:absolute;
-
-width:2px;
-height:2px;
-
-background:#00ffff;
-
-border-radius:50%;
-
-box-shadow:0 0 8px cyan;
-
-animation:twinkle linear infinite;
-
-}
-
-@keyframes twinkle{
-
-0%{
-
-opacity:.2;
-transform:scale(.5);
-
-}
-
-50%{
-
-opacity:1;
-transform:scale(1.8);
-
-}
-
-100%{
-
-opacity:.2;
-transform:scale(.5);
-
-}
-
-}
-<div class="orbit orbit1">
-    <div class="particle"></div>
-</div>
-
-<div class="orbit orbit2">
-    <div class="particle"></div>
-</div>
-
-<div class="orbit orbit3">
-    <div class="particle"></div>
-</div>
-
-<div id="coreStatus">
-    AI CORE ONLINE
-</div>
-<div id="hexGrid"></div>
-
-<div id="scanLine"></div>
-
-<div id="systemReady">
-SYSTEM READY
-</div>
-/* =======================
-HEX GRID
-======================= */
-
-#hexGrid{
-
-position:absolute;
-
-left:50%;
-top:50%;
-
-width:340px;
-height:340px;
-
-transform:translate(-50%,-50%);
-
-border:2px dashed rgba(0,255,255,.15);
-
-border-radius:50%;
-
-animation:spin 35s linear infinite;
-
-}
-
-/* =======================
-SCAN LINE
-======================= */
-
-#scanLine{
-
-position:absolute;
-
-left:50%;
-top:50%;
-
-width:320px;
-height:2px;
-
-background:cyan;
-
-box-shadow:
-
-0 0 20px cyan,
-
-0 0 50px cyan;
-
-transform:translate(-50%,-50%);
-
-animation:scan 3s infinite;
-
-}
-
-@keyframes scan{
-
-0%{
-
-transform:translate(-50%,-140px);
-
-opacity:.2;
-
-}
-
-50%{
-
-opacity:1;
-
-}
-
-100%{
-
-transform:translate(-50%,140px);
-
-opacity:.2;
-
-}
-
-}
-
-/* =======================
-SYSTEM READY
-======================= */
-
-#systemReady{
-
-position:absolute;
-
-top:-70px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-font-size:16px;
-
-letter-spacing:5px;
-
-color:#00ffff;
-
-text-shadow:0 0 20px cyan;
-
-animation:blinkReady 2s infinite;
-
-}
-
-@keyframes blinkReady{
-
-0%{
-
-opacity:.3;
-
-}
-
-50%{
-
-opacity:1;
-
-}
-
-100%{
-
-opacity:.3;
-
-}
-<div class="core">
-
-    <div class="innerCore"></div>
-
-    <div class="energyWave"></div>
-
-</div>
-.innerCore{
-
-position:absolute;
-
-left:50%;
-top:50%;
-
-width:35px;
-height:35px;
-
-transform:translate(-50%,-50%);
-
-background:white;
-
-border-radius:50%;
-
-box-shadow:
-0 0 20px cyan,
-0 0 40px cyan,
-0 0 80px cyan;
-
-animation:innerPulse 1.8s infinite;
-
-}
-
-.energyWave{
-
-position:absolute;
-
-left:50%;
-top:50%;
-
-width:90px;
-height:90px;
-
-transform:translate(-50%,-50%);
-
-border:2px solid cyan;
-
-border-radius:50%;
-
-animation:wave 2.5s infinite;
-
-}
-
-@keyframes wave{
-
-0%{
-
-opacity:1;
-
-transform:
-translate(-50%,-50%)
-scale(.5);
-
-}
-
-100%{
-
-opacity:0;
-
-transform:
-translate(-50%,-50%)
-scale(2.3);
-
-}
-
-}
-
-@keyframes innerPulse{
-
-0%{
-
-transform:
-translate(-50%,-50%)
-scale(.8);
-
-}
-
-50%{
-
-transform:
-translate(-50%,-50%)
-scale(1.15);
-
-}
-
-100%{
-
-transform:
-translate(-50%,-50%)
-scale(.8);
-
-}
-
-}
-<!-- ANA PANEL -->
-<div id="mainPanel" class="hidden">
-
-    <div class="topBar">
-        <h1>BERKIN AI SYSTEM</h1>
-        <span class="status">● ONLINE</span>
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h2>AI CORE</h2>
-            <p>Yapay zeka sistemi aktif.</p>
-            <button>Başlat</button>
-        </div>
-
-        <div class="card">
-            <h2>COMMAND</h2>
-            <p>Komut merkezi hazır.</p>
-            <button>Komut Gir</button>
-        </div>
-
-        <div class="card">
-            <h2>SYSTEM</h2>
-            <p>Tüm sistemler kontrol altında.</p>
-            <button>Kontrol</button>
-        </div>
-
-    </div>
-
-</div>
-.hidden{
-    display:none;
-}
-
-#mainPanel{
-    color:white;
-    padding:30px;
-}
-
-.topBar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #00ffff;
-    padding-bottom:15px;
-}
-
-.status{
-    color:#00ff88;
-}
-
-.cards{
-    display:flex;
-    gap:20px;
-    margin-top:30px;
-}
-
-.card{
-    background:rgba(0,0,0,0.5);
-    border:1px solid #00ffff;
-    padding:20px;
-    width:250px;
-    border-radius:15px;
-    box-shadow:0 0 15px #00ffff;
-}
-
-.card button{
-    background:#00ffff;
-    border:none;
-    padding:10px 20px;
-    cursor:pointer;
-    border-radius:8px;
-}setTimeout(function(){
-
-    document.getElementById("mainPanel").classList.remove("hidden");
-
-},5000);
+"""
+JARVIS PRO - Sesli + Yazılı, Gerçek Yapay Zeka Destekli Asistan
+=================================================================
+
+Bu sürüm öncekinden farklı olarak:
+  1) Hem KONUŞARAK hem YAZARAK komut verebilirsiniz (aynı anda dinler).
+  2) Basit kalıp komutların (saat, hava durumu vb.) dışında kalan her şeyi
+     gerçek bir yapay zekaya (Claude API) sorup GERÇEK, akıllı cevaplar alır.
+     Böylece "ezbere" cevaplar yerine gerçek bir asistanla konuşmuş gibi olursunuz.
+  3) Konuşma geçmişini hatırlar (aynı oturum içinde bağlam kaybolmaz).
+
+KURULUM
+-------
+    pip install SpeechRecognition pyttsx3 pyaudio wikipedia requests anthropic
+
+API ANAHTARI
+------------
+Gerçek yapay zeka cevapları için bir Anthropic API anahtarına ihtiyacınız var:
+    https://console.anthropic.com adresinden alıp ortam değişkeni olarak tanımlayın:
+
+    Windows (PowerShell):  setx ANTHROPIC_API_KEY "buraya-anahtar"
+    macOS/Linux:            export ANTHROPIC_API_KEY="buraya-anahtar"
+
+API anahtarı yoksa program yine çalışır; sadece kalıp komutlarla sınırlı kalır,
+serbest sohbet için basit bir uyarı verir.
+"""
+
+import os
+import sys
+import threading
+import queue
+import datetime
+import webbrowser
+
+import speech_recognition as sr
+import pyttsx3
+import requests
+import wikipedia
+
+try:
+    import anthropic
+    API_ANAHTARI = os.environ.get("ANTHROPIC_API_KEY")
+    AI_AKTIF = bool(API_ANAHTARI)
+    if AI_AKTIF:
+        istemci = anthropic.Anthropic(api_key=API_ANAHTARI)
+except ImportError:
+    AI_AKTIF = False
+
+
+# ----------------------------------------------------------------------
+# SES MOTORU
+# ----------------------------------------------------------------------
+engine = pyttsx3.init()
+for voice in engine.getProperty('voices'):
+    if 'turkish' in voice.name.lower() or 'tr' in voice.id.lower():
+        engine.setProperty('voice', voice.id)
+        break
+engine.setProperty('rate', 178)
+
+konusma_kilidi = threading.Lock()
+
+
+def konus(metin):
+    """Metni hem ekrana yazar hem sesli okur (thread-safe)."""
+    print(f"\nJARVIS: {metin}\n")
+    with konusma_kilidi:
+        engine.say(metin)
+        engine.runAndWait()
+
+
+# ----------------------------------------------------------------------
+# ORTAK KOMUT KUYRUĞU (sesli ve yazılı girişler buraya düşer)
+# ----------------------------------------------------------------------
+komut_kuyrugu = queue.Queue()
+CALISIYOR = True
+
+
+def sesli_dinleyici():
+    """Arka planda sürekli mikrofonu dinler, algıladığı metni kuyruğa atar."""
+    r = sr.Recognizer()
+    mikrofon = sr.Microphone()
+    with mikrofon as kaynak:
+        r.adjust_for_ambient_noise(kaynak, duration=1)
+
+    while CALISIYOR:
+        try:
+            with mikrofon as kaynak:
+                ses = r.listen(kaynak, timeout=4, phrase_time_limit=10)
+            metin = r.recognize_google(ses, language="tr-TR")
+            komut_kuyrugu.put(("ses", metin.lower()))
+        except sr.WaitTimeoutError:
+            continue
+        except sr.UnknownValueError:
+            continue
+        except sr.RequestError:
+            continue
+        except OSError:
+            # Mikrofon yoksa döngüyü durdur
+            break
+
+
+def yazili_dinleyici():
+    """Arka planda klavyeden gelen satırları okur, kuyruğa atar."""
+    while CALISIYOR:
+        try:
+            metin = input()
+        except EOFError:
+            break
+        if metin.strip():
+            komut_kuyrugu.put(("yazi", metin.strip().lower()))
+
+
+# ----------------------------------------------------------------------
+# YARDIMCI FONKSİYONLAR
+# ----------------------------------------------------------------------
+def gunaydin_kontrolu():
+    saat = datetime.datetime.now().hour
+    if 6 <= saat < 12:
+        konus("Günaydın efendim.")
+    elif 12 <= saat < 18:
+        konus("İyi günler efendim.")
+    elif 18 <= saat < 22:
+        konus("İyi akşamlar efendim.")
+    else:
+        konus("İyi geceler efendim.")
+
+
+def hava_durumu(sehir="Izmir"):
+    try:
+        yanit = requests.get(f"https://wttr.in/{sehir}?format=%C+%t", timeout=5)
+        konus(f"{sehir} için hava durumu: {yanit.text}" if yanit.status_code == 200
+              else "Hava durumu bilgisine ulaşamadım.")
+    except Exception:
+        konus("Hava durumu servisine bağlanırken bir hata oluştu.")
+
+
+def wikipedia_ara(sorgu):
+    try:
+        wikipedia.set_lang("tr")
+        konus(wikipedia.summary(sorgu, sentences=2))
+    except Exception:
+        konus("Bu konuda net bir sonuç bulamadım.")
+
+
+# ----------------------------------------------------------------------
+# GERÇEK YAPAY ZEKA İLE SERBEST SOHBET
+# ----------------------------------------------------------------------
+sohbet_gecmisi = []
+
+SISTEM_TALIMATI = (
+    "Sen JARVIS adında, kullanıcıya 'efendim' diye hitap eden, kibar, kısa ve net "
+    "konuşan bir sesli asistansın. Cevapların sesli okunacağı için 2-3 cümleyi "
+    "geçmemeye, madde işareti veya markdown kullanmamaya özen göster."
+)
+
+
+def ai_ile_konus(mesaj):
+    if not AI_AKTIF:
+        konus("Bu konuda serbest sohbet edebilmem için bir API anahtarı tanımlanmamış efendim.")
+        return
+
+    sohbet_gecmisi.append({"role": "user", "content": mesaj})
+    try:
+        yanit = istemci.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=300,
+            system=SISTEM_TALIMATI,
+            messages=sohbet_gecmisi[-10:],  # son 10 mesajla sınırlı bağlam
+        )
+        cevap = "".join(blok.text for blok in yanit.content if blok.type == "text")
+        sohbet_gecmisi.append({"role": "assistant", "content": cevap})
+        konus(cevap)
+    except Exception as hata:
+        konus("Yapay zeka servisine ulaşırken bir sorunla karşılaştım efendim.")
+        print(f"[Hata detayı: {hata}]")
+
+
+# ----------------------------------------------------------------------
+# KOMUT YÖNLENDİRME
+# ----------------------------------------------------------------------
+def komutu_isle(komut):
+    global CALISIYOR
+
+    if "saat kaç" in komut:
+        konus(f"Saat şu anda {datetime.datetime.now().strftime('%H:%M')}.")
+
+    elif "tarih" in komut or "bugün günlerden" in komut:
+        konus(f"Bugünün tarihi: {datetime.datetime.now().strftime('%d %B %Y')}")
+
+    elif "hava durumu" in komut:
+        parcalar = komut.split("hava durumu")
+        sehir = parcalar[-1].strip() or "Izmir"
+        hava_durumu(sehir)
+
+    elif "youtube" in komut:
+        konus("YouTube açılıyor.")
+        webbrowser.open("https://youtube.com")
+
+    elif "google aç" in komut:
+        konus("Google açılıyor.")
+        webbrowser.open("https://google.com")
+
+    elif komut.startswith("wikipedia") or "vikipedi" in komut:
+        sorgu = komut.replace("wikipedia", "").replace("vikipedi", "").strip()
+        wikipedia_ara(sorgu)
+
+    elif "adın ne" in komut or "sen kimsin" in komut:
+        konus("Ben JARVIS, sizin kişisel asistanınızım.")
+
+    elif any(k in komut for k in ["kapan", "güle güle", "çıkış yap", "dur artık"]):
+        konus("Görüşmek üzere efendim.")
+        CALISIYOR = False
+        return False
+
+    else:
+        # Kalıba uymayan her şey gerçek yapay zekaya gider
+        ai_ile_konus(komut)
+
+    return True
+
+
+# ----------------------------------------------------------------------
+# ANA DÖNGÜ
+# ----------------------------------------------------------------------
+def ana_dongu():
+    gunaydin_kontrolu()
+    konus("Ben JARVIS. Hem konuşarak hem yazarak benimle iletişim kurabilirsiniz.")
+    print(">> Konuşabilir ya da buraya yazıp Enter'a basabilirsiniz.\n")
+
+    ses_thread = threading.Thread(target=sesli_dinleyici, daemon=True)
+    yazi_thread = threading.Thread(target=yazili_dinleyici, daemon=True)
+    ses_thread.start()
+    yazi_thread.start()
+
+    calisiyor = True
+    while calisiyor:
+        kaynak, komut = komut_kuyrugu.get()
+        etiket = "🎤" if kaynak == "ses" else "⌨️"
+        print(f"{etiket} Kullanıcı: {komut}")
+        calisiyor = komutu_isle(komut)
+
+
+if __name__ == "__main__":
+    try:
+        ana_dongu()
+    except KeyboardInterrupt:
+        print("\nJARVIS kapatılıyor...")
+        CALISIYOR = False
+        sys.exit(0)
